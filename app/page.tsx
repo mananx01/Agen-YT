@@ -1,103 +1,320 @@
-import Image from "next/image";
+'use client'
+
+import { Card, CardContent } from "@/components/ui/card";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { FeatureCard } from "./components/FeatureCard";
+import clsx from "clsx";
+import { Separator } from "@/components/ui/separator";
+import { WavyBackground } from "@/components/ui/wavy-background";
+// import { Parallax } from "react-scroll-parallax";
+import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
+import { FeaturesSectionDemo } from "./components/FeatureGrid";
+
+
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  const features = [
+  {
+    title: "Transcription",
+    description:
+      "Get accurate transcriptions of your videos in seconds.",
+    image:
+      "Transcription.jpeg",
+  },
+  {
+    title: "Image Generation",
+    description:
+      "Generate Thumbnails and previews for your videos.",
+    image:
+      "Image-Generation.jpeg",
+  },
+  {
+    title: "Image Analysis",
+    description:
+      "Analyse the images of your videos for insights and trends.",
+    image:
+      "Image-analysis.jpeg",
+  },
+  {
+    title: "Title Generation",
+    description:
+      "Generate engaging and captivating titles for your videos.",
+    image:
+      "Title-generator.jpeg",
+  },
+  {
+    title: "Script Generation",
+    description:
+      "Generate short scripts for your videos.",
+    image:
+      "Script-generation.jpeg",
+  },
+];
+
+
+const steps =[
+  {
+    title: "1. Connect Your Content",
+    description: "Connect your videos to our platform, and we'll analyze and process them for you.",
+    icon : "Video",
+  },
+  {
+    title: "2. AI Agent Analysis",
+    description: "Our AI agents will analyze your videos and provide insights, recommendations, and feedback.",
+    icon : "Brain",
+  },
+  { 
+    title: "3. Recieve Insights",
+    description: "Receive real-time insights and recommendations on your videos.",
+    icon : "MessageSquare",
+  }
+
+];
+
+
+const fadeUpVariant: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.42, 0, 0.58, 1], // easeInOut
+    },
+  },
+};
+
+
+  return (
+
+    <div
+      className="relative flex min-h-screen flex-col bg-black overflow-x-hidden"
+      style={{ fontFamily: 'Inter, "Noto Sans", sans-serif' }}
+    >
+      <div className="layout-container flex h-full grow flex-col">
+       
+        {/* Header */}
+        {/* <header className="flex items-center justify-between border-b border-[#293542] px-10 py-3">
+          <div className="flex items-center gap-4 text-white">
+            <div className="w-4 h-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor" />
+              </svg>
+            </div>
+            <h2 className="text-lg font-bold tracking-[-0.015em]">AgenYT</h2>
+          </div>
+          <div className="flex flex-1 justify-end gap-8">
+            <nav className="flex items-center gap-9">
+              <a className="text-sm font-medium text-white" href="#">Features</a>
+              <a className="text-sm font-medium text-white" href="#">Pricing</a>
+              <a className="text-sm font-medium text-white" href="#">Contact</a>
+            </nav>
+            <button className="h-10 px-4 bg-[#d2e2f3] text-[#14191f] text-sm font-bold rounded-full">
+              Get Started
+            </button>
+          </div>
+        </header> */}
+
+
+        {/* Main */}
+        <main className="flex flex-1 justify-center px-4 md:px-40">
+          <div className="w-full max-w-[960px]">
+        
+          <WavyBackground
+              backgroundFill="black"
+              colors={["#38bdf8", "#818cf8", "#c084fc", "#e879f9", "#22d3ee"]}
+              waveWidth={60}
+              blur={20}
+              speed="slow"
+              waveOpacity={0.4}
+              containerClassName="min-h-screen"
+            >
+
+              <section className="flex flex-col items-center justify-center gap-6 bg-cover bg-center bg-no-repeat min-h-[480px] rounded-xl">
+
+                <div className="text-center max-w-2xl px-4">
+                  <h1 className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight bg-clip-text bg-gradient-to-r from-[#bcdaf0] to-[#d2e2f3 text-gray-300 drop-shadow-[0_2px_6px_rgba(255,255,255,0.2)]">
+                    Unlock the Power of Content with <span className="text-blue-950">AgenYT</span>
+                  </h1>
+                  <p className="mt-4 text-sm md:text-base text-slate-100 max-w-xl mx-auto leading-relaxed">
+                    Create faster. Engage better. Let AgenYT generate titles, scripts, transcriptions, thumbnails, and insights — all from your videos.
+                  </p>  
+                </div>
+
+                <div className="w-full max-w-[480px] h-14 md:h-16 mt-4">
+                    <div className="flex h-full rounded-xl overflow-hidden bg-[#14191f]/70 backdrop-blur-md shadow-[0_0_0_1px_rgba(255,255,255,0.05)] transition-all focus-within:shadow-[0_0_0_2px_rgba(210,226,243,0.4)]">
+                      <div className="flex items-center px-3 border-r border-[#3b4c5e] text-[#9badc0]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                          <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z" />
+                        </svg>
+                      </div>
+
+                      <input
+                        autoFocus
+                        placeholder="Enter YouTube Video URL"
+                        className="flex-1 bg-transparent text-white px-4 placeholder:text-[#94a3b8] text-sm md:text-base focus:outline-none"
+                      />
+
+                      <button className="h-full px-4 md:px-5 bg-gradient-to-r from-[#bcdaf0] to-[#d2e2f3] text-[#14191f] text-sm font-bold hover:brightness-105 transition-all rounded-r-xl">
+                        Analyze
+                      </button>
+                    </div>
+                </div>
+              </section>
+              
+            </WavyBackground>
+
+
+            {/* skew scroll bg divider */}
+            {/* <div className="relative h-64 overflow-hidden bg-transparent border-transparent">
+              <div className="absolute top-0 left-0 w-full h-full transform skew-y-[-6deg] bg-gradient-to-l from-[#51b9e6] to-[#7f88d4] opacity-20" />
+              <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white">
+                <h2 className="text-3xl font-bold">Supercharge Your Workflow</h2>
+                <p className="text-sm text-slate-100">AI meets creativity. Elevate your content.</p>
+              </div>
+            </div> */}
+
+            {/* <Parallax speed={-15}>
+              <div className="relative h-[300px] overflow-hidden rounded-2xl w-full">
+                <div className="absolute inset-0 bg-[url('/parallex.jpg')] bg-cover bg-center opacity-30" />
+                <div className="relative z-10 h-full flex flex-col items-center justify-center text-center">
+                  <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight text-white drop-shadow-lg">
+                    Let Your Content Shine
+                  </h2>
+                  <p className="mt-2 text-base text-[#cbd5e1]">
+                    AgenYT brings AI power right into your video workflow.
+                  </p>
+                </div>
+              </div>
+            </Parallax> */}
+
+            {/* <section
+              className="flex flex-col items-center justify-center gap-6 bg-cover bg-center bg-no-repeat min-h-[480px] p-4 rounded-xl"
+              style={{
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('landingPage3.jpg')`,
+              }}
+            >
+              <div className="text-center max-w-2xl">
+                <h1 className="text-4xl md:text-5xl font-black text-white leading-tight tracking-[-0.033em]">
+                  Unlock Power of Content By AgenYT
+                </h1>
+                <p className="text-sm md:text-base text-[#d1d5db] mt-2">
+                  Unleash the power of content creation with AgenYT.
+                </p>
+              </div>  
+
+              <div className="w-full max-w-[480px] h-14 md:h-16">
+                <div className="flex h-full rounded-xl overflow-hidden bg-[#14191f]/70 backdrop-blur-md shadow-[0_0_0_1px_rgba(255,255,255,0.05)] transition-all focus-within:shadow-[0_0_0_2px_rgba(210,226,243,0.4)]">
+                  <div className="flex items-center px-3 border-r border-[#3b4c5e] text-[#9badc0]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                      <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z" />
+                    </svg>
+                  </div>
+
+                  <input
+                    placeholder="Enter YouTube URL"
+                    className="flex-1 bg-transparent text-white px-4 placeholder:text-[#94a3b8] text-sm md:text-base focus:outline-none"
+                  />
+
+                  <button className="h-full px-4 md:px-5 bg-gradient-to-r from-[#bcdaf0] to-[#d2e2f3] text-[#14191f] text-sm font-bold hover:brightness-105 transition-all rounded-r-xl">
+                    Analyze
+                  </button>
+                </div>
+              </div>
+            </section> */}
+
+              <motion.section
+              id="features1"
+              className="py-20 px-4 relative pt-16 pb-20 scroll-mt-20"
+              variants={fadeUpVariant}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+            >
+
+              <div className="mx-auto w-full max-w-screen-xl">
+                <div className="text-center mb-10">
+                  <h2
+                    className={clsx(
+                      "text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight",
+                      "bg-gradient-to-r from-[#d2e2f3] to-white text-transparent bg-clip-text"
+                    )}
+                  >
+                    Discover What You Can Do
+                  </h2>
+                  <p className="mt-2 text-sm sm:text-base text-[#9badc0]">
+                    Powerful tools to transform your videos with ease.
+                  </p>
+                </div>
+
+
+                <FeaturesSectionDemo/>
+              </div>
+
+            </motion.section>
+
+
+            {/* Features Section */}
+            {/* <section id="features" className="py-20 px-4 relative pt-16 pb-20 scroll-mt-20">
+
+            </section> */}
+          
+                    
+            {/* how it works section */}
+            <section className="py-20 px-4 relative sm:px-8 lg:px-20 bg-black overflow-hidden">
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#1f2937] via-transparent to-[#0f172a] opacity-30" />
+              </div>
+              <div className="relative z-10 mx-auto w-full max-w-screen-xl">
+                <div className="text-center mb-16">
+                  <h2
+                    className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight text-transparent bg-gradient-to-r from-[#d2e2f3] to-white bg-clip-text"
+                  >
+                    Meet Your AI Agent in 3 Simple Steps
+                  </h2>
+                  <p className="mt-2 text-sm sm:text-base text-[#9badc0]">
+                    Get more done with fewer clicks. Here’s how it works:
+                  </p>
+                </div>
+                <div className="grid md:grid-cols-3 gap-10">
+                  {steps.map((step, index) => (
+                    <div
+                      key={index}
+                      className="p-6 rounded-xl border border-[#2a3542] bg-[#1a202c]/60 backdrop-blur-md transition-all hover:shadow-[0_0_12px_#38bdf8] hover:border-blue-500"
+                    >
+                      <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-blue-400 text-white shadow-lg">
+                        {/* Placeholder for icon or emoji */}
+                        <span className="text-2xl">{index + 1}</span>
+                      </div>
+                      <h3 className="text-xl font-semibold mb-2 text-white">{step.title}</h3>
+                      <p className="text-[#cbd5e1]">{step.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+                      
+          
+          
+          </div>
+        </main>
+
+        {/* Footer */}
+        <footer className="flex justify-center px-4">
+          <div className="w-full max-w-[960px] text-center py-10">
+            <div className="flex flex-wrap justify-center gap-6 mb-4">
+              <a className="text-[#9badc0] text-base" href="#">Contact Us</a>
+              <a className="text-[#9badc0] text-base" href="#">Privacy Policy</a>
+              <a className="text-[#9badc0] text-base" href="#">Terms of Service</a>
+            </div>
+            <p className="text-[#9badc0] text-base">© 2025 AgenYT. All rights reserved.</p>
+          </div>
+        </footer>
+      </div>
     </div>
   );
 }
