@@ -1,17 +1,10 @@
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import {
-  IconAdjustmentsBolt,
+  // IconAdjustmentsBolt,
   IconBrain,
-  IconCloud,
-  IconCurrencyDollar,
-  IconEaseInOut,
-  IconHeart,
-  IconHelp,
   IconImageInPicture,
-  IconRouteAltLeft,
   IconScript,
-  IconTerminal2,
   IconTextCaption,
   IconTiltShiftFilled,
 } from "@tabler/icons-react";

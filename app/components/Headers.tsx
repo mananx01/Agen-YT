@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import React from 'react'
 import AgentPulse from './AgentPulse'
-import { SignedIn, SignedOut, SignIn, SignInButton, UserButton } from '@clerk/nextjs'
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 import { Button } from '@/components/ui/button'
 
 function Headers() {

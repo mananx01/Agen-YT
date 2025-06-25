@@ -1,12 +1,12 @@
 'use client'
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
-import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { FeatureCard } from "./components/FeatureCard";
+// import { Card, CardContent } from "@/components/ui/card";
+// import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+// import { Badge } from "@/components/ui/badge";
+// import { ScrollArea } from "@/components/ui/scroll-area";
+// import { FeatureCard } from "./components/FeatureCard";
 import clsx from "clsx";
-import { Separator } from "@/components/ui/separator";
+// import { Separator } from "@/components/ui/separator";
 import { WavyBackground } from "@/components/ui/wavy-background";
 // import { Parallax } from "react-scroll-parallax";
 import { motion } from "framer-motion";
@@ -17,43 +17,43 @@ import { FeaturesSectionDemo } from "./components/FeatureGrid";
 
 export default function Home() {
 
-  const features = [
-  {
-    title: "Transcription",
-    description:
-      "Get accurate transcriptions of your videos in seconds.",
-    image:
-      "Transcription.jpeg",
-  },
-  {
-    title: "Image Generation",
-    description:
-      "Generate Thumbnails and previews for your videos.",
-    image:
-      "Image-Generation.jpeg",
-  },
-  {
-    title: "Image Analysis",
-    description:
-      "Analyse the images of your videos for insights and trends.",
-    image:
-      "Image-analysis.jpeg",
-  },
-  {
-    title: "Title Generation",
-    description:
-      "Generate engaging and captivating titles for your videos.",
-    image:
-      "Title-generator.jpeg",
-  },
-  {
-    title: "Script Generation",
-    description:
-      "Generate short scripts for your videos.",
-    image:
-      "Script-generation.jpeg",
-  },
-];
+//   const features = [
+//   {
+//     title: "Transcription",
+//     description:
+//       "Get accurate transcriptions of your videos in seconds.",
+//     image:
+//       "Transcription.jpeg",
+//   },
+//   {
+//     title: "Image Generation",
+//     description:
+//       "Generate Thumbnails and previews for your videos.",
+//     image:
+//       "Image-Generation.jpeg",
+//   },
+//   {
+//     title: "Image Analysis",
+//     description:
+//       "Analyse the images of your videos for insights and trends.",
+//     image:
+//       "Image-analysis.jpeg",
+//   },
+//   {
+//     title: "Title Generation",
+//     description:
+//       "Generate engaging and captivating titles for your videos.",
+//     image:
+//       "Title-generator.jpeg",
+//   },
+//   {
+//     title: "Script Generation",
+//     description:
+//       "Generate short scripts for your videos.",
+//     image:
+//       "Script-generation.jpeg",
+//   },
+// ];
 
 
 const steps =[
@@ -159,7 +159,7 @@ const fadeUpVariant: Variants = {
                         className="flex-1 bg-transparent text-white px-4 placeholder:text-[#94a3b8] text-sm md:text-base focus:outline-none"
                       />
 
-                      <button className="h-full px-4 md:px-5 bg-gradient-to-r from-[#bcdaf0] to-[#d2e2f3] text-[#14191f] text-sm font-bold hover:brightness-105 transition-all rounded-r-xl">
+                      <button className="h-full px-4 md:px-5 bg-gradient-to-r from-[#bcdaf0] to-[#d2e2f3] text-[#14191f] text-sm font-bold hover:brightness-105 transition-all rounded-r-xl cursor-pointer">
                         Analyze
                       </button>
                     </div>

@@ -7,7 +7,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 
-export function FeatureCard({ feature }: { feature: any }) {
+interface Feature {
+  image: string;
+  title: string;
+  description: string;
+}
+
+export function FeatureCard({ feature }: { feature: Feature }) {
   const controls = useAnimation();
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.15 });
 
