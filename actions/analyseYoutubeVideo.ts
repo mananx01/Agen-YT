@@ -14,6 +14,6 @@ export async function analyseYoutubeVideo(formData: FormData) {
   if(!videoID) return;
 
   // redirect to new page with video analysis result
-  redirect(`http://localhost:3000/video/${videoID}/analysis`); // add http://localhost:3000
+  redirect(`http://agent-yt.netlify.app/video/${videoID}/analysis`); // in production 
 
 }
