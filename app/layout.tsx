@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ClientWrapper from "./components/ClientWrapper";
 import Headers from "./components/Headers";
-// import { ParallaxProvider } from "react-scroll-parallax";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,20 +25,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
 
-        {/* <ParallaxProvider> */}
-          <ClientWrapper>
-            <Headers/>
-            <main>{children}</main>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+
+          
+          <ClientWrapper >
+              <Headers/>
+              <main>{children}</main>
           </ClientWrapper>
-        {/* </ParallaxProvider> */}
+          
         
-       
-      </body>
+        </body>
     </html>
+
   );
 }

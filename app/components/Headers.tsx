@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 
 function Headers() {
   return (
-    <header className='sticky top-0 z-50 left-0 right-0 px-4 md:px-0 bg-gradient-to-b from-slate-800 to-black backdrop-blur-sm border-b border-black'>
+    <header className='sticky top-0 z-50 left-0 right-0 px-4 md:px-4 bg-gradient-to-b from-slate-800 to-black backdrop-blur-sm border-b border-black'>
       <div className='container mx-auto flex justify-between items-center'>
         <div className='flex items-center justify-between h-16'>
             <Link href={"/"} className='flex items-center gap-4'>
@@ -19,7 +19,7 @@ function Headers() {
 
         <div className='text-white flex items-center gap-4'>
           <SignedIn>
-            <Link href="manage-plans">
+            <Link href="/manage-plans">
               <Button 
                 variant={"outline"}
                 className='bg-transparent text-gray-300 font-semibold px-5 py-2 rounded-sm
@@ -38,8 +38,8 @@ function Headers() {
               <Button 
               variant='ghost'
               // className='text-rose-100 text-md'
-              className='text-md mr-4 text-gray-300
-                 bg-clip-text'
+              className='rounded-3xl border-blue-800 text-md mr-4 text-black
+                 bg-gradient-to-t from-blue-500 to-purple-400 cursor-pointer hover:bg-blue-900 hover:text-black'
               >
                 Sign-in
               </Button>

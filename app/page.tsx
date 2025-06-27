@@ -12,6 +12,7 @@ import { WavyBackground } from "@/components/ui/wavy-background";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { FeaturesSectionDemo } from "./components/FeatureGrid";
+import YoutubeVideoForm from "./components/YoutubeVideoForm";
 
 
 
@@ -97,28 +98,6 @@ const fadeUpVariant: Variants = {
     >
       <div className="layout-container flex h-full grow flex-col">
        
-        {/* Header */}
-        {/* <header className="flex items-center justify-between border-b border-[#293542] px-10 py-3">
-          <div className="flex items-center gap-4 text-white">
-            <div className="w-4 h-4">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor" />
-              </svg>
-            </div>
-            <h2 className="text-lg font-bold tracking-[-0.015em]">AgenYT</h2>
-          </div>
-          <div className="flex flex-1 justify-end gap-8">
-            <nav className="flex items-center gap-9">
-              <a className="text-sm font-medium text-white" href="#">Features</a>
-              <a className="text-sm font-medium text-white" href="#">Pricing</a>
-              <a className="text-sm font-medium text-white" href="#">Contact</a>
-            </nav>
-            <button className="h-10 px-4 bg-[#d2e2f3] text-[#14191f] text-sm font-bold rounded-full">
-              Get Started
-            </button>
-          </div>
-        </header> */}
-
 
         {/* Main */}
         <main className="flex flex-1 justify-center px-4 md:px-40">
@@ -145,25 +124,8 @@ const fadeUpVariant: Variants = {
                   </p>  
                 </div>
 
-                <div className="w-full max-w-[480px] h-14 md:h-16 mt-4">
-                    <div className="flex h-full rounded-xl overflow-hidden bg-[#14191f]/70 backdrop-blur-md shadow-[0_0_0_1px_rgba(255,255,255,0.05)] transition-all focus-within:shadow-[0_0_0_2px_rgba(210,226,243,0.4)]">
-                      <div className="flex items-center px-3 border-r border-[#3b4c5e] text-[#9badc0]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-                          <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z" />
-                        </svg>
-                      </div>
+                <YoutubeVideoForm/>
 
-                      <input
-                        autoFocus
-                        placeholder="Enter YouTube Video URL"
-                        className="flex-1 bg-transparent text-white px-4 placeholder:text-[#94a3b8] text-sm md:text-base focus:outline-none"
-                      />
-
-                      <button className="h-full px-4 md:px-5 bg-gradient-to-r from-[#bcdaf0] to-[#d2e2f3] text-[#14191f] text-sm font-bold hover:brightness-105 transition-all rounded-r-xl cursor-pointer">
-                        Analyze
-                      </button>
-                    </div>
-                </div>
               </section>
               
             </WavyBackground>
@@ -227,8 +189,8 @@ const fadeUpVariant: Variants = {
               </div>
             </section> */}
 
-              <motion.section
-              id="features1"
+            <motion.section
+              id="features"
               className="py-20 px-4 relative pt-16 pb-20 scroll-mt-20"
               variants={fadeUpVariant}
               initial="hidden"
@@ -256,18 +218,12 @@ const fadeUpVariant: Variants = {
               </div>
 
             </motion.section>
-
-
-            {/* Features Section */}
-            {/* <section id="features" className="py-20 px-4 relative pt-16 pb-20 scroll-mt-20">
-
-            </section> */}
-          
                     
+
             {/* how it works section */}
             <section className="py-20 px-4 relative sm:px-8 lg:px-20 bg-black overflow-hidden">
               <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#1f2937] via-transparent to-[#0f172a] opacity-30" />
+                <div className="rounded-2xl absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#1f2937] via-transparent to-[#0f172a] opacity-30" />
               </div>
               <div className="relative z-10 mx-auto w-full max-w-screen-xl">
                 <div className="text-center mb-16">
@@ -297,8 +253,6 @@ const fadeUpVariant: Variants = {
                 </div>
               </div>
             </section>
-                      
-          
           
           </div>
         </main>
