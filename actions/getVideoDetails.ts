@@ -53,7 +53,10 @@ export const getVideoDetails = async (videoId: string) => {
                 title: videoDetails?.snippet?.channelTitle || "Unknown Channel",
                 thumbnail: channelDetails?.snippet?.thumbnails?.default?.url || "",
                 subscribers: channelDetails?.statistics?.subscriberCount || "0",
-            }
+            },
+
+            // description
+            description: videoDetails?.snippet?.description || "No Description Available",
         }
 
         return video;

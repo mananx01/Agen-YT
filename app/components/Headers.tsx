@@ -23,12 +23,12 @@ function Headers() {
               <Button 
                 variant={"outline"}
                 className='bg-transparent text-gray-300 font-semibold px-5 py-2 rounded-sm
-                shadow-md hover:bg-slate-950 hover:text-white hover:cursor-pointer transition-all"'
+                shadow-md hover:bg-slate-950 hover:text-white hover:cursor-pointer transition-all border border-pink-500'
                 >Manage Plans
               </Button>
             </Link>
             <div className='p-2 w-10 h-10 flex items-center justify-center rounded-full 
-            border border-blue-200 bg-slate-900 hover:bg-slate-700 transition-colors shadow-sm'>
+            border border-pink-500 bg-slate-900 hover:bg-slate-700 transition-colors shadow-sm'>
               <UserButton/>
             </div>
           </SignedIn>
@@ -46,6 +46,7 @@ function Headers() {
             </SignInButton>
           </SignedOut>
 
+          {/* <ThemeToggle/> */}
         </div>
       </div>
     </header>

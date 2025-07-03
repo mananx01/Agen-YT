@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Usage from './Usage'
 import { FeatureFlags } from '@/features/flags'
 import { useSchematicEntitlement } from '@schematichq/schematic-react';
+import { getYoutubeTranscript } from '@/actions/getYoutubeTranscript';
 
 interface TranscriptEntry {
     text: string;
@@ -10,32 +11,49 @@ interface TranscriptEntry {
 
 function Transcriptions({videoId} : {videoId:string}) {
 
+    const [transcript,setTranscript] = useState<{
+        transcript: TranscriptEntry[];
+        cache: string;
+    } | null >(null);
+
     const {featureUsageExceeded} = useSchematicEntitlement(
         FeatureFlags.TRANSCRIPTION
     );
 
     console.log(videoId)
 
-    const [transcript] = useState<{
-        transcript: TranscriptEntry[];
-        cache: string;
-    } | null >(null);
-    
+    const handleGenerateTranscription = useCallback(
+        async (videoId: string) => {
+            if(featureUsageExceeded) {
+                console.log("Transcription limit reached, the user must upgrade")
+                return;
+            }
+
+            const result = await getYoutubeTranscript(videoId);
+            setTranscript(result);
+        },
+        [featureUsageExceeded]
+    )
+   
+    useEffect(() => {
+        handleGenerateTranscription(videoId);
+    },[handleGenerateTranscription, videoId])
+
   return (
-    <div className='border p-4 pb-0 rounded-xl gap-4 flex flex-col'>
+    <div className='border border-black bg-black p-4 pb-0 rounded-xl gap-4 flex flex-col'>
         <Usage featureFlag={FeatureFlags.TRANSCRIPTION} title='Transcription' />
  
         {!featureUsageExceeded ? (
-            <div> 
+            <div className='max-h-96 overflow-y-auto space-y-2 p-2 bg-gray-950 rounded'> 
                 {transcript? 
                     (transcript.transcript.map((entry,index) => (
                     <div key={index} className='flex gap-2'>
-                        <span className='text-sm text-gray-400 min-w-[50px]'>{entry.timestamp}</span>
-                        <p className='text-sm text-gray-700'>{entry.text}</p>
+                        <span className='text-sm text-blue-500 min-w-[50px]'>{entry.timestamp}</span>
+                        <p className='text-sm text-gray-400'>{entry.text}</p>
                     </div>
                     ))
                 ) : (
-                    <p className='text-sm text-gray-500 p-4'>No Transcriptions available</p>
+                    <p className='text-sm text-gray-500 p-4 text-center'>No Transcriptions Available</p>
                 )}
             </div>
         ): null}

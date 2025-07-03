@@ -5,6 +5,7 @@ export interface ChannelDetails {
 }
 
 export interface VideoDetails {
+    description: string;
     title: string;
     views: string;
     likes: string;

@@ -24,7 +24,7 @@ function Usage({
 
     if(hasUsedAllTokens) {
         return (
-        <div className='bg-white rounded-2xl shadow-sm border border-red-100 p-6'>
+        <div className='bg-gray-950 rounded-2xl shadow-sm border border-red-100 p-6'>
             <div className='flex justify-between items-center mb-4'>
                 <h2 className='text-xl font-semibold text-gray-800'>{title}</h2>
                 <div className='px-4 py-4 bg-red-50 rounded-lg'> 
@@ -50,11 +50,11 @@ function Usage({
 
     if(!isFeatureEnabled ) {
         return (
-            <div className='bg-white rounded-2xl shadow-sm border border-gray-100 p-6 opacity-50'>
+            <div className='bg-slate-950 rounded-2xl shadow-sm border border-gray-400 p-6 opacity-50'>
                 <div className='flex justify-between items-center mb-4'>
-                    <h2 className='text-xl font-semibold etxt-gray-800'>{title}</h2>
-                    <div className='px-4 py-2 bg-gray-50 rounded-lg'>
-                        <span className='text-gray-500'>Feature Disabled</span>
+                    <h2 className='text-xl font-semibold text-gray-300'>{title}</h2>
+                    <div className='px-4 py-2 bg-gray-950 rounded-lg'>
+                        <span className='text-red-500'>Feature Disabled</span>
                     </div>
                 </div>
                 <div className='relative'>
@@ -78,14 +78,13 @@ function Usage({
 
     const progressColor = getProgressColor(progress);
 
+
   return (
-    <div>
+    <div className=''>
         <div className='flex justify-between items-center mb-4 gap-4'>
-            <h2 className='text-xl font-semibold text-gray-800'>{title}</h2>
-            <div className='px-4 py-2 bg-gray-50 rounded-lg'> 
-                <span className='font-medium text-gray-700'>{featureUsage}</span>
-                <span className='text-gray-400 mx-2'>/</span>
-                <span className='font-medium text-gray-700'>{featureAllocation}</span>
+            <h2 className='text-xl font-semibold text-pink-700'>{title}</h2>
+            <div className='px-4 py-2 bg-black rounded-lg'> 
+                <span className='font-medium text-pink-900'>{featureUsage} / {featureAllocation}</span>
             </div>
         </div>
 

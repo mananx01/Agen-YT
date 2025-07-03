@@ -14,7 +14,7 @@ function AgentPulse({ size = "medium", color = "blue"  }: AgentPulseProps) {
     };
 
     const colorClasses = {
-        blue: "bg-blue-500 shadow-[0_0_8px_4px_rgba(59, 130, 246, 0.5)]",
+        blue: "bg-pink-700 shadow-[0_0_8px_4px_rgba(59, 130, 246, 0.5)]",
         green: "bg-green-500 shadow-[0_0_8px_4px_rgba(77, 208, 80, 0.5)]",
         yellow: "bg-yellow-500 shadow-[0_0_8px_4px_rgba(255, 209, 71, 0.5)]",
     };

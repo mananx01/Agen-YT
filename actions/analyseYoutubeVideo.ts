@@ -13,7 +13,9 @@ export async function analyseYoutubeVideo(formData: FormData) {
   const videoID = getVideoIDFromURL(url) // to be implement (fix this)
   if(!videoID) return;
 
+  // add a tracking event
+
   // redirect to new page with video analysis result
-  redirect(`http://agent-yt.netlify.app/video/${videoID}/analysis`); // in production 
+  redirect(`/video/${videoID}/analysis`); // in production 
 
 }

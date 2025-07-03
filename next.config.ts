@@ -11,6 +11,15 @@ const nextConfig: NextConfig = {
       {
         hostname: "yt3.ggpht.com",
         protocol: "https"
+      },
+      {
+        hostname: "cdn.stability.ai",
+        protocol: "https", 
+      },
+      {
+        
+        hostname: "oceanic-mule-275.convex.cloud",
+        protocol: "https",
       }
     ],
   },
