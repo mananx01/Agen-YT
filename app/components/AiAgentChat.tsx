@@ -74,7 +74,7 @@ function AiAgentChat({videoId} : {videoId: string}) {
                 });
                 break;
             case "streaming":
-                toastId = toast("AgenYT is repying...",{
+                toastId = toast("AgenYT is replying...",{
                     id: toastId,
                     icon: <BotIcon className='w-4 h-4'/>
                 });
@@ -137,8 +137,8 @@ function AiAgentChat({videoId} : {videoId: string}) {
 
   return (
     <div className='text-white flex flex-col h-full'>
-        <div className='hidden lg:block px-4 pb-3 border-b border-pink-900 '>
-            <h2 className='text-lg font-semibold text-gray-200'>AI AgenYT</h2>
+        <div className='hidden lg:block px-4 pb-3 border-b border-[#802d61] '>
+            <h2 className='text-lg font-semibold text-[#f5f5f5]'>AgenYT Chat</h2>
         </div>
 
         <div 
@@ -150,8 +150,8 @@ function AiAgentChat({videoId} : {videoId: string}) {
                 {messages.length == 0 && (
                     <div className='flex items-center justify-center h-full min-h-[200px]'>
                         <div className='text-center space-y-2'>
-                            <h3 className='text-lg font-medium text-gray-700'>Welcome to AI Agent Chat</h3>
-                            <p className='text-gray-500 text-sm'>Ask any question about your video!</p>
+                            <h3 className='text-lg font-medium text-[#a1a1aa]'>Welcome to AI Agent Chat</h3>
+                            <p className='text-zinc-500 text-sm'>Ask any question about your video!</p>
                         </div>
                     </div>
                 )}
@@ -162,23 +162,23 @@ function AiAgentChat({videoId} : {videoId: string}) {
                     className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
                     >
                         <div 
-                        className={`max-w-[85%] ${m.role === "user" ? "bg-pink-700" : "bg-purple-200 text-black"} rounded-2xl px-4 py-3`}
+                        className={`max-w-[85%] ${m.role === "user" ? "bg-[#ff4da6] text-white" : "bg-[#1f1f1f] text-[#f5f5f5]"} rounded-2xl px-4 py-3`}
                         >
                         {m.parts && m.role === "assistant" ? (
                             //assistant message 
                             <div className="space-y-3">
                                 {m.parts.map((part,index) => 
                                     part.type === "text" ? (
-                                        <div key={index} className='prose prose-sm max-w-none'>
+                                        <div key={index} className='prose prose-sm max-w-none text-zinc-200 prose-headings:text-zinc-200 prose-p:text-zinc-200 prose-strong:text-zinc-200 prose-li:text-zinc-200'>
                                            <ReactMarkdown>{part.text}</ReactMarkdown>
                                         </div>
                                     ) : part.type === "tool-invocation" ? (
-                                        <div key={index} className="bg-white/50 rounded-lg p-2 space-y-2 text-gray-800"> 
+                                        <div key={index} className="bg-white/5 rounded-lg p-2 space-y-2 text-zinc-300"> 
                                             <div className='font-medium text-xs'>
                                                 {formateToolInvocation(part as ToolPart)}
                                             </div>
                                             {(part as ToolPart).toolInvocation.result && (
-                                                <pre className='text-xs bg-whie/75 p-2 rounded overflow-auto max-h-40'>
+                                                <pre className='text-xs bg-white/10 p-2 rounded overflow-auto max-h-40 custom-scrollbar'>
                                                     {JSON.stringify(
                                                         (part as ToolPart).toolInvocation.result,
                                                         null,
@@ -207,7 +207,7 @@ function AiAgentChat({videoId} : {videoId: string}) {
 
         {/* input form */}
 
-        <div className='border-t border-pink-900 p-4 bg-black'>
+        <div className='border-t border-[#802d61] p-4 bg-[#0f0f0f]'>
             <div className='space-y-3'>
                 <form onSubmit={handleSubmit} className='flex gap-2'>
 
@@ -221,9 +221,9 @@ function AiAgentChat({videoId} : {videoId: string}) {
                     </button> */}
 
                     <input 
-                    className='flex-1 px-4 py-2 text-sm text-gray-200 border border-gray-700 
-                    rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 
-                    focus:border-transparent'
+                    className='flex-1 px-4 py-2 text-sm text-white bg-[#1c1c1e] border border-zinc-700 rounded-full
+                    focus:outline-none focus:ring-2 focus:ring-[#5bc0eb] focus:border-transparent
+                    placeholder:text-zinc-400'
                     type="text" 
                     placeholder={
                         !isVideoAnalysisEnabled 
@@ -240,8 +240,8 @@ function AiAgentChat({videoId} : {videoId: string}) {
                             status === "submitted" || 
                             !isVideoAnalysisEnabled
                         }
-                        className='px-4 py-2 bg-pink-700 text-white text-sm rounded-full
-                        hover:bg-pink-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+                        className='px-4 py-2 bg-[#ff4da6] text-white text-sm rounded-full
+                        hover:bg-pink-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
                     >
                     {
                         status === "streaming" ? "AI is replying..." 
@@ -254,8 +254,9 @@ function AiAgentChat({videoId} : {videoId: string}) {
                 {/* buttons  */}
                 <div className='flex gap-2'>
                 <button
-                    className='text-xs xl:text-sm w-full flex items-center justify-center gap-2 py-2 px-4 bg-pink-700
-                    hover:bg-pink-900 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
+                    className='text-xs xl:text-sm w-full flex items-center justify-center gap-2 py-2 px-4
+                        bg-[#ff4da6] hover:bg-pink-500 text-white rounded-full transition-colors
+                        disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
                     onClick={generateScript}
                     type = 'button'
                     disabled={!isScriptGenerationEnabled}
@@ -269,8 +270,9 @@ function AiAgentChat({videoId} : {videoId: string}) {
                 </button>   
 
                 <button
-                    className='text-xs xl:text-sm w-full flex items-center justify-center gap-2 py-2 px-4 bg-pink-700
-                    hover:bg-pink-900 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
+                    className='text-xs xl:text-sm w-full flex items-center justify-center gap-2 py-2 px-4
+                        bg-[#ff4da6] hover:bg-pink-500 text-white rounded-full transition-colors
+                        disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
                     onClick={generateTitle}
                     type = 'button'
                     disabled={!isTitleGenerationEnabled}
@@ -284,8 +286,9 @@ function AiAgentChat({videoId} : {videoId: string}) {
                 </button>   
 
                 <button
-                    className='text-xs xl:text-sm w-full flex items-center justify-center gap-2 py-2 px-4 bg-pink-700
-                    hover:bg-pink-900 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
+                    className='text-xs xl:text-sm w-full flex items-center justify-center gap-2 py-2 px-4
+                        bg-[#ff4da6] hover:bg-pink-500 text-white rounded-full transition-colors
+                        disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
                     onClick={generateImage}
                     type = 'button'
                     disabled={!isImageGenerationEnabled}

@@ -31,7 +31,7 @@ function YoutubeVideoDetails({videoId} : {videoId: string}) {
     }
 
     return (  
-    <div className='@container bg-black rounded-xl'>
+    <div className='@container bg-black rounded-xl text-[#f5f5f5]'>
         
         <div className='flex flex-col gap-8'>
             <div className='flex-shrink-0'>
@@ -47,7 +47,7 @@ function YoutubeVideoDetails({videoId} : {videoId: string}) {
 
             {/* video details */}
             <div className='flex-grow space-y-4'>
-                <h1 className='text-2xl @lg:text-3xl font-bold text-gray-300
+                <h1 className='text-2xl @lg:text-3xl font-bold text-white
                 leading-tight line-clamp-2'>
                     {video.title}
                 </h1>
@@ -59,20 +59,20 @@ function YoutubeVideoDetails({videoId} : {videoId: string}) {
                         alt={video.channel.title}
                         width={48}
                         height={48}
-                        className='w-10 h-10 @md:w-12 @md:h-12 rounded-full border-2 border-black' 
+                        className='w-10 h-10 @md:w-12 @md:h-12 rounded-full border-2 border-[#1c1c1e]' 
                     />
 
                     <div>
-                        <p className='text-base @md:text-lg font-semibold text-gray-300'>{video.channel.title}</p>
-                        <p className='text-sm @md:text-base text-gray-300'>{video.channel.subscribers} subscribers</p>
+                        <p className='text-base @md:text-lg font-semibold text-[#e0e0e0]'>{video.channel.title}</p>
+                        <p className='text-sm @md:text-base text-zinc-400'>{video.channel.subscribers} subscribers</p>
                     </div>
 
                 </div>
 
                 {/* video stats */}
                 <div className='grid grid-cols-2 @lg:grid-cols-4 gap-4 pt-4'>
-                    <div className='bg-slate-950 rounded-lg p-3 transition-all
-                    duration-300 hover:bg-slate-900'>
+                    <div className='bg-[#121212] rounded-lg p-3 transition-all
+                    duration-300 hover:bg-[#1c1c1e]'>
                         <div>
                             <IconCalendar className='w-4 h-4 text-gray-500'/>
                             <p className='text-sm text-gray-200'>Published</p>
@@ -82,8 +82,8 @@ function YoutubeVideoDetails({videoId} : {videoId: string}) {
                         </p>
                     </div>
 
-                    <div className='bg-slate-950 rounded-lg p-3 transition-all
-                    duration-300 hover:bg-slate-900'>
+                    <div className='bg-[#121212] rounded-lg p-3 transition-all
+                    duration-300 hover:bg-[#1c1c1e]'>
                         <div>
                             <IconEye className='w-4 h-4 text-gray-500'/>
                             <p className='text-sm text-gray-300'>Views</p>
@@ -93,8 +93,8 @@ function YoutubeVideoDetails({videoId} : {videoId: string}) {
                         </p> 
                     </div>
 
-                    <div className='bg-slate-950 rounded-lg p-3 transition-all
-                    duration-300 hover:bg-slate-900'>
+                    <div className='bg-[#121212] rounded-lg p-3 transition-all
+                    duration-300 hover:bg-[#1c1c1e]'>
                         <div>
                             <IconThumbUp className='w-4 h-4 text-gray-500'/>
                             <p className='text-sm text-gray-300'>Likes</p>
@@ -104,8 +104,8 @@ function YoutubeVideoDetails({videoId} : {videoId: string}) {
                         </p> 
                     </div>
 
-                    <div className='bg-slate-950 rounded-lg p-3 transition-all
-                    duration-300 hover:bg-slate-900'>
+                    <div className='bg-[#121212] rounded-lg p-3 transition-all
+                    duration-300 hover:bg-[#1c1c1e]'>
                         <div>
                             <IconMessageCircle className='w-4 h-4 text-gray-500'/>
                             <p className='text-sm text-gray-300'>Comments</p>

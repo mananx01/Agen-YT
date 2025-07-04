@@ -44,13 +44,13 @@ function VideoDescription({description} : {description: string}) {
         : truncateText(description, CHARACTER_LIMIT);
 
 return (
-    <div className="text-sm text-gray-200 bg-gray-950 border border-gray-700 rounded-lg p-3">
-        <div className='font-bold text-lg text-gray-200'>Description</div>
+    <div className="text-sm text-[#e0e0e0] bg-[#121212] border border-[#2a2a2a] rounded-lg p-3">
+        <div className='font-bold text-lg text-[#f5f5f5]'>Description</div>
         {formatDescription(displayedText)}
         {description.length > CHARACTER_LIMIT && (
         <button
             onClick={() => setShowFull(!showFull)}
-            className="mt-2 text-blue-400 font-semibold hover:underline cursor-pointer"
+            className="mt-2 text-pink-400 font-semibold hover:text-pink-300 hover:underline cursor-pointer"
         >
             {showFull ? 'Show less' : 'Show more'}
         </button>

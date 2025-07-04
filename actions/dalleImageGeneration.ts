@@ -5,25 +5,12 @@ import { featureFlagEvents, FeatureFlags } from "@/features/flags";
 import { getConvexClient } from "@/lib/convex";
 import { client } from "@/lib/schematic";
 import { currentUser } from "@clerk/nextjs/server";
-import { use } from "react";
+import OpenAI from "openai"
+
 
 const convexClient = getConvexClient();
+const IMAGE_SIZE = "256x256" as const;
 
-function base64ToBlob(base64: string, mime = "image/png"): Blob {
-  const byteCharacters = atob(base64);
-  const byteArrays = [];
-
-  for (let i = 0; i < byteCharacters.length; i += 512) {
-    const slice = byteCharacters.slice(i, i + 512);
-    const byteNumbers = new Array(slice.length);
-    for (let j = 0; j < slice.length; j++) {
-      byteNumbers[j] = slice.charCodeAt(j);
-    }
-    byteArrays.push(new Uint8Array(byteNumbers));
-  }
-
-  return new Blob(byteArrays, { type: mime });
-}
 
 
 export const dalleImageGeneration = async (prompt: string, videoId: string) => {
@@ -33,84 +20,84 @@ export const dalleImageGeneration = async (prompt: string, videoId: string) => {
     throw new Error("User not found");
   }
 
-  if (!prompt) {
-    throw new Error("Generating image requires a prompt.");
+  const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  }) 
+
+  if(!prompt) {
+    throw new Error("Failed to generate image prompt !!");
   }
 
-  console.log("sending api request...");
+  console.log("Generating dalle image with prompt...", prompt);
 
-  if (!process.env.STABILITY_API_KEY_IMAGE) {
-    throw new Error("Missing STABILITY_API_KEY_IMAGE in env");
-  }
 
-  const form = new FormData();
-  form.append("prompt", prompt);
-  form.append("output_format", "png"); 
-  const response = await fetch("https://api.stability.ai/v2beta/stable-image/generate/core", {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${process.env.STABILITY_API_KEY_IMAGE!}`,
-      "Accept": "application/json",
-    },
-    body: form,
+  const imageResponse = await openai.images.generate({
+    model: "dall-e-2",
+    prompt: prompt,
+    n : 1, 
+    size: IMAGE_SIZE,
+    // quality: "standard",
+    // style: "vivid",
   });
 
-  console.log("api request fetched succesfully");
-    // Validate response
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error("Stability API error:", errorText);
-    throw new Error("Image generation failed.");
+  const imageUrl = imageResponse.data?.[0]?.url;
+
+  if(!imageUrl) {
+    throw new Error("Failed to generate image");
   }
-
-  const data = await response.json();
-  
-  console.log("Api data: ", data);
-
-  const imageBlob = base64ToBlob(data.image);
-  console.log("converted base 64 string into blob")
 
 
   // 1 : Get a short lived upload url for convex
-  console.log("Getting uplaod url");
+  console.log("Getting upload url");
   const postUrl = await convexClient.mutation(api.images.generateUploadUrl);
   console.log("Obtained Convex upload URL.");
   
 
   // 2. Upload the image to convex storage 
-  const uploadResult = await fetch(postUrl, {
-  method: "POST",
-  headers: { "Content-Type": imageBlob.type },
-  body: imageBlob,
-  });
+  console.log("downloading image form openai...")
+  const image: Blob = await fetch(imageUrl).then((res) => res.blob());
+  console.log("Downloaded image successfully.");
 
 
-  const {storageId} = await uploadResult.json();
-  console.log("Uploaded image to Convex with storageId:", storageId);
-    
-  // Step 3: Store image metadata in the database
-  await convexClient.mutation(api.images.storeImage, {
-    storageId,
-    videoId,
-    userId: user.id,
-  });
+
+  // Step 3: Store image to the convex storage bucket
+  console.log("uploading image to storage...");
+  const result = await fetch(postUrl, {
+    method: "POST",
+    headers: {"Content-Type": image!.type},
+    body: image,
+  })
   console.log("Stored image reference in DB.");
 
+  const {storageId } = await result.json();
+  console.log("Uploaded image to storage with ID: ", storageId);
+
+
+  // step - 4 : saving the newly allocated stirage id to the db 
+  console.log("Saving image reference to db...");
+  await convexClient.mutation(api.images.storeImage, {
+    storageId: storageId,
+    videoId,
+    userId: user.id,
+  })
+  console.log("Saved image reference to db...");
+
+  // get serve image url
   const dbImageUrl = await convexClient.query(api.images.getImage, {
     videoId,
     userId: user.id,
   });
 
-    //  track the image generation event 
-    await client.track({
-        event: featureFlagEvents[FeatureFlags.IMAGE_GENERATION].event,
-        company: {
-            id: user.id,
-        },
-        user: {
-            id: user.id,
-        }
-    });
+  //  track the image generation event 
+  await client.track({
+      event: featureFlagEvents[FeatureFlags.IMAGE_GENERATION].event,
+      company: {
+        id: user.id,
+      },
+      user: {
+        id: user.id,
+      }
+  });
 
   return {
     imageUrl : dbImageUrl,

@@ -8,7 +8,16 @@ export default {
     './features/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        background: 'bg-zinc-950',
+        surface: '#1c1c1e',
+        accent: '#e60073',
+        'accent-hover': '#ff4da6',
+        success: '#3fe58c',
+        muted: '#b0b0b0',
+      },
+    }
   },
   plugins:  [
     require('@tailwindcss/typography'),

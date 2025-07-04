@@ -64,7 +64,7 @@ export const getImage = query({
         )
         .first();
 
-        if(!image) {
+        if(!image) { 
             return null;
         }
     

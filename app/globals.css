@@ -143,4 +143,13 @@
       transform: translateY(0);
     }
   }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #2e2e2e;
+    border-radius: 4px;
+  }
+
 }

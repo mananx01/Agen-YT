@@ -8,12 +8,16 @@ import { Button } from '@/components/ui/button'
 
 function Headers() {
   return (
-    <header className='sticky top-0 z-50 left-0 right-0 px-4 md:px-4 bg-gradient-to-b from-slate-800 to-black backdrop-blur-sm border-b border-black'>
+    <header className='sticky top-0 z-50 left-0 right-0 px-4 md:px-6 
+  bg-gradient-to-b from-[#2a002e] via-black to-black 
+  backdrop-blur-md border-b border-black'>
       <div className='container mx-auto flex justify-between items-center'>
         <div className='flex items-center justify-between h-16'>
             <Link href={"/"} className='flex items-center gap-4'>
             <AgentPulse size='small' color='blue'/>
-            <h1 className='text-xl font-semibold bg-gradient-to-b from-gray-300 to-gray-500 bg-clip-text text-transparent'>AgenYT</h1>
+            <h1 className='text-xl md:text-xl font-bold tracking-wide
+            bg-gradient-to-b from-[#d1d1ff] via-white to-[#a1a1ff] bg-clip-text text-transparent
+            drop-shadow-[0_1px_4px_rgba(255,255,255,0.25)]'>𝗔𝗴𝗲𝗻𝗬𝗧</h1>
             </Link>
         </div>
 
@@ -21,14 +25,16 @@ function Headers() {
           <SignedIn>
             <Link href="/manage-plans">
               <Button 
-                variant={"outline"}
-                className='bg-transparent text-gray-300 font-semibold px-5 py-2 rounded-sm
-                shadow-md hover:bg-slate-950 hover:text-white hover:cursor-pointer transition-all border border-pink-500'
+                variant={"ghost"}
+                className='px-5 py-2 rounded-md text-sm font-medium
+              bg-black/30 backdrop-blur-md border border-pink-500 text-pink-300
+              hover:bg-pink-500/20 hover:text-white transition-all shadow-md'
                 >Manage Plans
               </Button>
             </Link>
-            <div className='p-2 w-10 h-10 flex items-center justify-center rounded-full 
-            border border-pink-500 bg-slate-900 hover:bg-slate-700 transition-colors shadow-sm'>
+            <div className='w-10 h-10 rounded-full flex items-center justify-center
+          bg-black/30 backdrop-blur-md border border-pink-500 text-white
+          hover:bg-pink-500/20 transition-colors shadow-md'>
               <UserButton/>
             </div>
           </SignedIn>

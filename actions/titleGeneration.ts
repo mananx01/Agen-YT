@@ -9,14 +9,13 @@ import { openai } from "@ai-sdk/openai";
 import { currentUser } from "@clerk/nextjs/server"
 import { generateText } from "ai";
 
-
 const convexClient = getConvexClient();
 
-const google = createGoogleGenerativeAI({
-    apiKey: process.env.GEMINI_API_KEY,
-    baseURL: "https://generativelanguage.googleapis.com/v1beta"
-});
-const model = google('gemini-2.5-flash');
+// const google = createGoogleGenerativeAI({
+//     apiKey: process.env.GEMINI_API_KEY,
+//     baseURL: "https://generativelanguage.googleapis.com/v1beta"
+// });
+// const model = google('gemini-2.5-flash');
 
 
 export async function titleGeneration(
@@ -32,34 +31,13 @@ export async function titleGeneration(
     }
 
     // check for the gemini api check 
-
     try {
         console.log("Videosummary: ", videoSummary);
         console.log("Generating title for a video with videoId: ", videoId);
         console.log("Considerations: ", considerations);
 
-        // const response = await openai.chat.completions.create({
-        //     model: "gpt-4o-mini",
-        //     message: [
-        //         {
-        //             role: "system",
-        //             content: 
-        //             `You are a helpful youtube video creator assistant that
-        //              creates high quality SEO friendly concise video titles.`,
-        //         },
-        //         {
-        //             role: "user",
-        //             content: `Please provide ONE concise youtube title (and nothing else) for this video.
-        //             Focus on the main points and key takeaways, it should be SEO friendly and 100 characters or less:
-        //             \n\n${videoSummary}\n\n${considerations}`,
-        //         }
-        //     ],
-        //     temperature: 0.7,
-        //     max_tokens: 500,
-        // })
-
         const response = await generateText({
-            model,
+            model: openai("gpt-3.5-turbo"),
             messages: [
                 {
                     role: 'system',
@@ -80,9 +58,10 @@ export async function titleGeneration(
                 },
             ],
             temperature: 0.7, // for randomness in different titles or responses
+            maxTokens: 50,
         })
 
-        const title = response.text.trim() || "Unable to generate title";
+        const title = response.text.trim();
 
         if(!title) {
             return {
@@ -97,7 +76,6 @@ export async function titleGeneration(
         }) 
 
         // track the title generation event in schematic 
-
         await client.track({
             event: featureFlagEvents[FeatureFlags.TITLE_GENERATION].event,
             company: {

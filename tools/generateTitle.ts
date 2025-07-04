@@ -40,6 +40,8 @@ export const generateTitle = (userId: string) => tool({
             }
         }
 
+        console.log("Generating title for the video in tools calling action...");
+
         const title = await titleGeneration(
             videoId,
             videoSummary,

@@ -40,20 +40,20 @@ function Transcriptions({videoId} : {videoId:string}) {
     },[handleGenerateTranscription, videoId])
 
   return (
-    <div className='border border-black bg-black p-4 pb-0 rounded-xl gap-4 flex flex-col'>
+    <div className='border border-[#1f1f1f] bg-black p-4 pb-0 rounded-2xl gap-4 flex flex-col'>
         <Usage featureFlag={FeatureFlags.TRANSCRIPTION} title='Transcription' />
  
         {!featureUsageExceeded ? (
-            <div className='max-h-96 overflow-y-auto space-y-2 p-2 bg-gray-950 rounded'> 
+            <div className='max-h-96 overflow-y-auto space-y-2 p-2 bg-[#121212] rounded-lg custom-scrollbar'> 
                 {transcript? 
                     (transcript.transcript.map((entry,index) => (
-                    <div key={index} className='flex gap-2'>
-                        <span className='text-sm text-blue-500 min-w-[50px]'>{entry.timestamp}</span>
-                        <p className='text-sm text-gray-400'>{entry.text}</p>
+                    <div key={index} className='flex gap-2 items-start'>
+                        <span className='text-sm text-blue-500 min-w-[55px]'>{entry.timestamp}</span>
+                        <p className='text-sm text-zinc-300 leading-snug'>{entry.text}</p>
                     </div>
                     ))
                 ) : (
-                    <p className='text-sm text-gray-500 p-4 text-center'>No Transcriptions Available</p>
+                    <p className='text-sm text-zinc-500 p-4 text-center'>No Transcriptions Available</p>
                 )}
             </div>
         ): null}

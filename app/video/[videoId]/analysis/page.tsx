@@ -13,6 +13,7 @@ import { useUser } from '@clerk/nextjs'
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner'
+import ScriptGeneration from '../../../components/ScriptGeneration'
 
 
 function AnalysisPage() {
@@ -49,15 +50,15 @@ function AnalysisPage() {
   const VideoTranscriptionStatus = 
     video === null ? (
 
-    <div className='inline-flex items-center gap-2 px-3 py-1.5 bg-gray-50 border-gray-200 rounded-full'> 
+    <div className='inline-flex items-center gap-2 px-3 py-1.5 bg-[#1f1f1f] border-gray-700 rounded-full'> 
       <div className='w-2 h-2 bg-gray-400 rounded-full animate-pulse'></div>
-      <span className='text-sm text-gray-700'>Loading video...</span>
+      <span className='text-sm text-gray-400'>Loading video...</span>
     </div>
 
   ) : video === undefined ? (
 
-    <div className='inline-flex items-center gap-2 px-3 py-1.5 bg-amber-50 border-amber-200 rounded-full'>
-      <div className='w-2 h-2 bg-amber-400 rounded-full animate-pulse'></div>
+    <div className='inline-flex items-center gap-2 px-3 py-1.5 bg-[#2a1a1f] border-pink-800 rounded-full'>
+      <div className='w-2 h-2 bg-pink-600 rounded-full animate-pulse'></div>
       <p className='text-sm text-amber-700'>
         This is the first time analysing the video
         <span className='font-semibold'> - 1 analysis token is being used !</span>
@@ -66,9 +67,9 @@ function AnalysisPage() {
 
   ) : (
       
-    <div className='inline-flex items-center gap-2 px-3 py-1.5 bg-green-50 border-green-200 rounded-full'>
-      <div className='w-2 h-2 bg-green-400 rounded-full animate-pulse'></div>
-      <p className='text-sm text-green-700'>
+    <div className='inline-flex items-center gap-2 px-3 py-1.5 bg-[#112d1f] border-emerald-800 rounded-full'>
+      <div className='w-2 h-2 bg-emerald-400 rounded-full animate-pulse'></div>
+      <p className='text-sm text-emerald-400'>
         Analysis exists for this video - no additional tokens needed in future calls. <br/>
       </p>
     </div>
@@ -77,46 +78,42 @@ function AnalysisPage() {
 
 
   return (
-    <div className='mx-auto px-4 md:px-4 bg-black'> 
+    <div className='mx-auto px-4 md:px-4 bg-[#0b0b0f]'> 
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
 
           {/* left side */}
           <div className='order-2 lg:order-1 flex flex-col gap-6
-            bg-black lg:border-r border-slate-900 p-6'>
-              {/* Analysis Section */}
-              <div className=''>
-                <Usage
-                  featureFlag = {FeatureFlags.ANALYSE_VIDEO}
-                  title = "Analyse Video"
-                />
-                {/* video transcription status here - to be implemented*/}
-              
-                <div className='py-4'>
-                  {VideoTranscriptionStatus}
-                </div>
-              
-                
+            bg-black lg:border-r border-slate-900 py-6 px-4'>
+            
+            {/* Analysis Section */}
+            <div className=''>
+              <Usage
+                featureFlag = {FeatureFlags.ANALYSE_VIDEO}
+                title = "Analyse Video"
+              />
+
+              {/* video transcription status*/}
+              <div className='py-4'>
+                {VideoTranscriptionStatus}
               </div>
-              {/* youtube video details */}
-              <YoutubeVideoDetails videoId={videoId} />
+            
+            </div>
+              
 
-              {/* thumbnail Generation */}
-              <ThumbnailGeneration videoId={videoId}/>
+            <YoutubeVideoDetails videoId={videoId} />
+            <ScriptGeneration videoId={videoId}/>
+            <ThumbnailGeneration videoId={videoId}/>
+            <TitleGeneration videoId={videoId} />
+            <Transcriptions videoId={videoId}/>
 
-              {/* title generation */}
-              <TitleGeneration videoId={videoId} />
 
-              {/* Transcriptions */}
-              <Transcriptions videoId={videoId}/>
           </div>
-
 
 
           {/* right side */}
-          <div className='order-1 lg:order-2 lg:sticky lg:top-20 h-[500px] md:h-[calc(100vh-6rem)]'>
+          <div className='order-1 lg:order-2 lg:sticky lg:top-20 h-[500px] md:h-[calc(100vh-6rem)] '>
               <AiAgentChat videoId={videoId}/>
           </div>
-            
         
         </div>  
     </div>

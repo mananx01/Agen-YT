@@ -12,7 +12,9 @@ export const generateImage = (videoId: string, userId: string) => tool({
     }),
     execute: async({prompt}) => {
         const schematicCtx = {
-            company : {id: userId},
+            company : {
+                id: userId,
+            },
             user : {
                 id: userId,
             }

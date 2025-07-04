@@ -11,37 +11,29 @@ import { generateImage } from '@/tools/generateImage';
 import { z } from 'zod';
 import { getVideoIDFromURL } from '@/lib/getYoutubeVideoURL';
 import { generateTitle } from '@/tools/generateTitle';
-// import { NextResponse } from 'next/server';
+import { generateScript } from '@/tools/generateScript';
+// import { openai } from '@ai-sdk/openai';
 
-const google = createGoogleGenerativeAI({
-    apiKey: process.env.GEMINI_API_KEY,
-    baseURL: "https://generativelanguage.googleapis.com/v1beta"
+const genAI = createGoogleGenerativeAI({
+  apiKey: process.env.GEMINI_API_KEY!, 
 });
+const model = genAI("gemini-1.5-flash");
 
-
-// const openai = createOpenAI({
-//   apiKey: process.env.CHATGPT_API_KEY,
-// });
-
-
-// const model = openai.chat('gpt-4o')
-
-const model = google('gemini-2.5-flash');
+// const model = openai("gpt-4o-mini");
 
 export async function POST(res: Request) {
-    console.log("Hello check point !!");   
+    console.log("Request accepted on route");   
 
     const user = await currentUser();
     if(!user) {
         NextResponse.json({erorr: "Unauthorized"}, {status: 401})
     }
 
+
     const {messages, videoId} = await res.json();
-    // console.log(messages, videoId);
-
     const videoDetails = await getVideoDetails(videoId);
+    console.log("Video details recieved on route");
 
-    // console.log(videoDetails)
 
     const systemMessage = `You are an AI agent ready to accept questions from the user about ONE specific video. The video ID in
     question is ${videoId} but you'll refer to this as ${videoDetails?.title || "Selected Video"}. Use and analyse this json object ${videoDetails} thorougly if user asks for 
@@ -68,6 +60,7 @@ export async function POST(res: Request) {
             fetchTranscript: fetchTranscript,
             generateImage: generateImage(videoId, user!.id),
             generateTitle: generateTitle(user!.id),
+            generateScript: generateScript(videoId, user!.id),
             getVideoDetails: tool({
                 description: "Get the details of a Youtube video",
                 parameters: z.object({
@@ -92,7 +85,7 @@ export async function POST(res: Request) {
         }
     });
 
-    console.log("api working successfully !");
+    console.log("Route working successfully");
     
     return response.toDataStreamResponse();
 
