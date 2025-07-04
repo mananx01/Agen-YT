@@ -1,7 +1,6 @@
 // import { google } from '@ai-sdk/google';
-import { createGoogleGenerativeAI } from '@ai-sdk/google';
+// import { createGoogleGenerativeAI } from '@ai-sdk/google';
 
-// import { createOpenAI } from '@ai-sdk/openai';
 import { streamText, tool  } from 'ai';
 import { currentUser } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';

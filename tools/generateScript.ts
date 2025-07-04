@@ -32,7 +32,7 @@ export const generateScript = (videoId: string, userId: string) => tool({
             }
         }
 
-
+        console.log("Generating script...")
         const script = await scriptGeneration(
             videoId,
             videoTranscript,

@@ -25,6 +25,7 @@ export const generateImage = (videoId: string, userId: string) => tool({
             FeatureFlags.IMAGE_GENERATION
         )
 
+
         if(!isImageGenerationEnabled) {
             return {
                 error: "Image generation is not enabled, the user must upgrade to generate thumbnails.",
