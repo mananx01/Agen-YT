@@ -12,14 +12,14 @@ import { z } from 'zod';
 import { getVideoIDFromURL } from '@/lib/getYoutubeVideoURL';
 import { generateTitle } from '@/tools/generateTitle';
 import { generateScript } from '@/tools/generateScript';
-// import { openai } from '@ai-sdk/openai';
+import { openai } from '@ai-sdk/openai';
 
-const genAI = createGoogleGenerativeAI({
-  apiKey: process.env.GEMINI_API_KEY!, 
-});
-const model = genAI("gemini-1.5-flash");
+// const genAI = createGoogleGenerativeAI({
+//   apiKey: process.env.GEMINI_API_KEY!, 
+// });
+// const model = genAI("gemini-1.5-flash");
 
-// const model = openai("gpt-4o-mini");
+const model = openai("gpt-4o");
 
 export async function POST(res: Request) {
     console.log("Request accepted on route");   
@@ -41,7 +41,9 @@ export async function POST(res: Request) {
     the user upgrade, explain that they must upgrade to use the feature, tell them to go to 'Manage Plans' in the header and
     upgrade. If any tool is used, analyse the response and if it contains a cache, explain that the transcript is cached because 
     they previously transcibed the video saving the user a token - use words like database instead of cache to make it more 
-    easy to understand. Format for notion.Also give `;
+    easy to understand. Format for notion.
+    use 'generateImage' tool for thumbnail generation, 'generateTitle' tool for title generation, 
+    'generateScript' tool for script generation for the video which I have provided to you.`;
 
 
     const response = streamText ({

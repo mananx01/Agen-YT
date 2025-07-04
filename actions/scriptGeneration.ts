@@ -26,7 +26,7 @@ export async function scriptGeneration (
 
     try {
         const response = await generateText({
-            model: openai("gpt-3.5-turbo"),
+            model: openai("gpt-4o"),
             messages: [
                 {
                     role: "system",
