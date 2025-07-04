@@ -127,43 +127,6 @@ const fadeUpVariant: Variants = {
             </WavyBackground>
 
         
-          {/* Features section */}
-            {/* <motion.section
-              id="features"
-              className="relative mb-20 py-20 px-4 sm:px-8 lg:px-20 scroll-mt-20 bg-gradient-to-t from-[#19001b] via-black to-black overflow-hidden rounded-2xl"
-              variants={fadeUpVariant}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-            >
-            
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="rounded-2xl absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#3c0056] via-transparent to-black opacity-20" />
-              </div>
-
-              <div className="relative z-10 mx-auto w-full max-w-screen-xl">
-                <div className="text-center mb-16">
-                  <h2
-                    className={clsx(
-                      "text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight",
-                      "text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight text-transparent bg-gradient-to-r from-pink-100 via-blue-200 to-white bg-clip-text drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
-                    )}
-                  >
-                    Discover What You Can Do
-                  </h2>
-                  <p className="mt-2 text-sm sm:text-base text-[#c5b9d6]">
-                    Powerful tools to transform your videos with ease.
-                  </p>
-                  <FeaturesSectionDemo />
-
-                </div>
-              </div>
-            </motion.section> */}
-
-
-
-            {/* skew scroll bg divider */}
-          
             {/* Features new section */}
             <motion.section 
               id="features"

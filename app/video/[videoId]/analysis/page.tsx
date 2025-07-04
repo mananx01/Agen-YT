@@ -21,13 +21,13 @@ function AnalysisPage() {
   const params = useParams<{videoId: string}>();
 
   const { videoId } = params;
-  const {user} = useUser();
+  const {user, isLoaded} = useUser();
   const [video, setVideo] = useState<Doc<"videos"> | undefined | null>(
     null
   );
 
   useEffect(() => {
-    if(!user?.id) return;
+     if (!isLoaded || !user?.id) return;
 
     const fetchVideo = async () => {
       const response = await createOrGetVideo(videoId as string, user.id);
@@ -76,6 +76,9 @@ function AnalysisPage() {
 
   );  
 
+  if (!isLoaded) {
+    return <div className="text-white p-4">Loading user session...</div>;
+  }
 
   return (
     <div className='mx-auto px-4 md:px-4 bg-[#0b0b0f]'> 

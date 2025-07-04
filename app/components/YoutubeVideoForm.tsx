@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import Form from "next/form"
 import AnalyseButton from './AnalyseButton'
