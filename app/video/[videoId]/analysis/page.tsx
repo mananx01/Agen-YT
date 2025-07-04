@@ -44,7 +44,7 @@ function AnalysisPage() {
 
     fetchVideo();
 
-  },[videoId, user])
+  },[videoId, user, isLoaded])
 
 
   const VideoTranscriptionStatus = 

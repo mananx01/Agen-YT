@@ -1,7 +1,7 @@
 "use server"
 
-import { fetchTranscript } from "@/tools/fetchTranscript";
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
+// import { fetchTranscript } from "@/tools/fetchTranscript";
+// import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { openai } from "@ai-sdk/openai";
 import { currentUser } from "@clerk/nextjs/server";
 import { generateText } from "ai";

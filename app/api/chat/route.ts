@@ -25,7 +25,7 @@ export async function POST(res: Request) {
 
     const user = await currentUser();
     if(!user) {
-        NextResponse.json({erorr: "Unauthorized"}, {status: 401})
+        return NextResponse.json({error: "Unauthorized"}, {status: 401})
     }
 
 

@@ -1,7 +1,6 @@
 'use server'
 import { VideoDetails } from "@/types/types";
 import { google } from "googleapis"
-import { youtubeAnalytics } from "googleapis/build/src/apis/youtubeAnalytics";
 
 const youtube = google.youtube({
     version: "v3",
