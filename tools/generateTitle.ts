@@ -1,5 +1,4 @@
 import { titleGeneration } from "@/actions/titleGeneration";
-import TitleGeneration from "@/app/components/TitleGeneration";
 import { FeatureFlags } from "@/features/flags";
 import { client } from "@/lib/schematic";
 import { tool } from "ai";
@@ -41,7 +40,6 @@ export const generateTitle = (userId: string) => tool({
         }
 
         console.log("Generating title for the video in tools calling action...");
-
         const title = await titleGeneration(
             videoId,
             videoSummary,

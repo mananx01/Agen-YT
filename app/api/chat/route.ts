@@ -34,19 +34,40 @@ export async function POST(res: Request) {
     console.log("Video details recieved on route");
 
 
-    const systemMessage = `You are an AI agent ready to accept questions from the user about ONE specific video. The video ID in
-    question is ${videoId} but you'll refer to this as ${videoDetails?.title || "Selected Video"}. Use and analyse this json object ${videoDetails} thorougly if user asks for 
-    the details about the video and answering the query of user about the current video. Use emojis to make the conversation more engaging. If an error occurs, explain it to the user and ask them to try again later. If the error suggest
-    the user upgrade, explain that they must upgrade to use the feature, tell them to go to 'Manage Plans' in the header and
-    upgrade. If any tool is used, analyse the response and if it contains a cache, explain that the transcript is cached because 
-    they previously transcibed the video saving the user a token - use words like database instead of cache to make it more 
-    easy to understand. Format for notion.
-    use 'generateImage' tool for thumbnail generation, 'generateTitle' tool for title generation, 
-    'generateScript' tool for script generation for the video which I have provided to you.`;
+    const systemMessage = `
+        You are an AI agent ready to accept questions from the user about ONE specific YouTube video. The video ID in question is ${videoId}, but you should refer to it as "${videoDetails?.title || "Selected Video"}".
 
+        Use and analyze this JSON object thoroughly to answer any queries about the video:
+        ${JSON.stringify(videoDetails)}
+
+        Your responses should be engaging and clear — use emojis to make them friendly. Format all answers using Notion-style formatting (use **bold**, bullet points, etc.).
+
+        If an error occurs (e.g. tool failure), explain the error kindly and ask the user to try again later. If the error suggests the user needs to upgrade, explain that they must upgrade their plan from the "Manage Plans" section in the header.
+
+        If a tool response contains a cache, explain to the user that it was retrieved from the database, meaning they’ve previously processed this and saved tokens — avoid the word "cache", and use "saved result" or "database result" instead.
+
+        ---
+
+        ### Tool usage instructions:
+
+        - Use the \`generateImage\` tool only if the user explicitly requests a **thumbnail**.
+        - Use the \`generateTitle\` tool only if the user asks for a **title**.
+        - Use the \`generateScript\` tool only if the user asks for a **script**.
+
+        ➡️ **IMPORTANT**:  
+        If the user asks for a script:
+        1. First, use the \`fetchTranscript\` tool with the provided \`videoId\`.
+        2. Then, once you receive the \`transcript\` from that tool, immediately call the \`generateScript\` tool using:
+        - the same \`videoId\`
+        - and the returned \`transcript\`
+        3. Do **not** attempt to generate the script yourself — always rely on tools.
+
+        Be accurate, avoid assumptions, and stick to facts from the video metadata or the tool outputs. Never skip tool usage if a tool is available for the task.
+    `;
 
     const response = streamText ({
         model,
+        maxSteps: 5, 
         messages: [
             {
                 role: 'system',
@@ -61,7 +82,7 @@ export async function POST(res: Request) {
             fetchTranscript: fetchTranscript,
             generateImage: generateImage(videoId, user!.id),
             generateTitle: generateTitle(user!.id),
-            generateScript: generateScript(videoId, user!.id),
+            generateScript: generateScript(user!.id),
             getVideoDetails: tool({
                 description: "Get the details of a Youtube video",
                 parameters: z.object({

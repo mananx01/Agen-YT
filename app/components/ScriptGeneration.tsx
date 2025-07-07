@@ -1,11 +1,9 @@
 "use client"
 
-// import { Switch } from '@/components/ui/switch';
 import { FeatureFlags } from '@/features/flags';
 import { useUser } from '@clerk/nextjs';
 import { useSchematicEntitlement } from '@schematichq/schematic-react';
 import React from 'react'
-// import Usage from './Usage';
 
 
 function ScriptGeneration({videoId} : {videoId: string}) {
@@ -13,7 +11,7 @@ function ScriptGeneration({videoId} : {videoId: string}) {
     const {user} = useUser();
 
     if(!user?.id) {
-        throw new Error('User not Found');
+      throw new Error('User not Found');
     }
 
     const {value: isScriptGenerationEnabled} = useSchematicEntitlement(FeatureFlags.SCRIPT_GENERATION);

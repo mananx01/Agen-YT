@@ -1,17 +1,9 @@
 "use server"
 
-// import { fetchTranscript } from "@/tools/fetchTranscript";
-// import { createGoogleGenerativeAI } from "@ai-sdk/google";
+
 import { openai } from "@ai-sdk/openai";
 import { currentUser } from "@clerk/nextjs/server";
 import { generateText } from "ai";
-
-
-// const google = createGoogleGenerativeAI({
-//     apiKey: process.env.GEMINI_API_KEY,
-//     baseURL: "https://generativelanguage.googleapis.com/v1beta"
-// });
-// const model = google('gemini-2.5-flash');
 
 
 export async function scriptGeneration (
@@ -25,6 +17,7 @@ export async function scriptGeneration (
     }
 
     try {
+        
         const response = await generateText({
             model: openai("gpt-4o"),
             messages: [
@@ -45,7 +38,7 @@ export async function scriptGeneration (
                 }
             ],
             temperature: 0.7,
-            maxTokens: 70,
+            maxTokens: 300,
         })
 
         const script = response.text.trim() || "Unable to generate script";

@@ -4,7 +4,7 @@ import { api } from "@/convex/_generated/api";
 import { featureFlagEvents, FeatureFlags } from "@/features/flags";
 import { getConvexClient } from "@/lib/convex";
 import { client } from "@/lib/schematic";
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
+// import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { openai } from "@ai-sdk/openai";
 import { currentUser } from "@clerk/nextjs/server"
 import { generateText } from "ai";

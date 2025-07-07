@@ -4,16 +4,15 @@ import { client } from "@/lib/schematic"
 import { tool } from "ai"
 import { z } from "zod"
 
-export const generateScript = (videoId: string, userId: string) => tool({
+export const generateScript = (userId: string) => tool({
     description: "Generate a script for a youtube video",
     parameters: z.object({
-        videoId: z.string().describe("The YouTube video ID"),
-        videoTranscript: z
+        videoId: z.string().describe("The URL to extract the video ID from"),
+        transcript: z
             .string()
             .describe("The transcript of the video to generate script for"),
-        tone: z.string().optional().describe("Optional tone or style of the script, e.g., formal, funny"),
     }),
-    execute: async({tone,videoTranscript}) => {
+    execute: async({videoId, transcript}) => {
         const schematicCtx = {
             company : {id: userId},
             user : {
@@ -33,9 +32,10 @@ export const generateScript = (videoId: string, userId: string) => tool({
         }
 
         console.log("Generating script...")
+        console.log("Transcript lenght: " , transcript.length);
         const script = await scriptGeneration(
             videoId,
-            videoTranscript,
+            transcript,
         );
 
         return { script };
